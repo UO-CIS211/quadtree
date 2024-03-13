@@ -98,13 +98,16 @@ regions were single pixels or larger blocks of our 8x8 grid.
 
 Instead of postfix notation, for quadtrees it will be more 
 convenient to use prefix notation, in which the parent node appears 
-before its children.  If we represent an 8x8 grid by GBBWW (a grey 
+before its children.  We will order the quadrants of each region
+clockwise from the top left:  NW, NE, SE, SW. 
+If we represent an 8x8 grid by GBBWW (a grey 
 node with two black quadrants and two white quadrants), we will know 
 when we encounter the first B that it represents a whole 4x4 
 quadrant of solid black, rather than a smaller region.  We could 
 build up the quadtree representation and then use it to fill a grid, 
 but we could also skip the quadtree representation and fill the grid 
 directly from the linear representation.  
+
 
 Consider again the grid above.  The first few characters of its 
 linearized quadtree would be GGBGBBWB.
@@ -117,6 +120,7 @@ With this understanding, we are ready to begin implementing
 a function that decodes the linear form (a string) and builds
 an 8x8 grid of characters, which we can also convert to a string.
 We'll start with a few symbolic constants. 
+
 
 ```python
 # Symbols in the input string
